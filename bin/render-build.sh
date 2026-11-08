@@ -1,8 +1,8 @@
-#!/usr/bin/env bas
+#!/usr/bin/env bash
 set -o errexit
 
 bundle install
 bin/rails assets:precompile
 bin/rails assets:clean
 
-chmod a+x bin/rails db:migrate
+bin/rails db:migrate
