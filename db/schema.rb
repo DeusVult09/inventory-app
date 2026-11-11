@@ -23,5 +23,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_10_235051) do
     t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
   end
 end
