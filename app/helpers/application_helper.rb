@@ -10,3 +10,9 @@ module ApplicationHelper
     end
   end
 end
+
+def oauth_providers
+  [ {name: "Google",url: "/auth/google_oauth2", style: "btn-outline-danger"},
+    {name: "GitHub", url: "/auth/github", style: "btn-dark" }
+  ]
+end

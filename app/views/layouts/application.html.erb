@@ -26,8 +26,10 @@
     <%= javascript_importmap_tags %>
   </head>
   <nav>
-    <%= form_with url: "/auth/google_oauth2", data: {turbo: false} do |form| %>
-      <%= form.button "Sign in", class: "btn btn-primary" %>
+    <% oauth_providers.each do | provider |%>
+      <%= form_with url: provider[:url], data: {turbo: false} do |form| %>
+         <%= form.button "Sign in with #{provider[:name]}", class: "btn #{provider[:style]}" %>
+      <% end %>
     <% end %>
   </nav>
   <body>
