@@ -25,9 +25,13 @@
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-
+  <nav>
+    <%= form_with url: "/auth/google_oauth2", data: {turbo: false} do |form| %>
+      <%= form.button "Sign in", class: "btn btn-primary" %>
+    <% end %>
+  </nav>
   <body>
-    <%= render "shared/flash" %>
+    <%= render "shared/flash"%>
     <%= yield %>
   </body>
 </html>
