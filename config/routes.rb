@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  get "sessions/create"
-  get "sessions/destroy"
-  get "sessions/failure"
   get "/privacy", to: "pages#privacy"
   get "/terms", to: "pages#terms"
+  get "/auth/:provider/callback", to: "sessions#create"
+  get "/auth/failure", to: "sessions#failure"
+  delete "/logout", to: "sessions#destroy"
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root "static_pages#home"
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
