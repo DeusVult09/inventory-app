@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     if user.active? && user.persisted?
       user_sign_in
     elsif user.blocked?
-      redirect_to root_path, notice: "Your account is blocked"
+      redirect_to root_path, alert: "Your account is blocked"
     else
       render :new, status: :unprocessable_entity
     end
