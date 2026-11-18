@@ -1,10 +1,14 @@
 class SessionsController < ApplicationController
-  before_action :omniauth_hash
 
   def create
-    current_user = create_or_find_auth_user
-    return user_sign_in if current_user.active? 
-    redirect_to root_path, notice: "Your account is blocked" if current_user.blocked?
+    user = create_or_find_auth_user
+    if user.active? && user.persisted?
+      user_sign_in
+    elsif user.blocked?
+      redirect_to root_path, notice: "Your account is blocked"
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -25,11 +29,11 @@ class SessionsController < ApplicationController
   def create_or_find_auth_user
     User.create_or_find_by(provider: omniauth_hash["provider"], uid: omniauth_hash["uid"]) do |user|
     user.email = omniauth_hash.dig("info", "email")
-    user.name = omniauth_hash.dig("info", "name").presence || "User"
+    user.name = omniauth_hash.dig("info", "name").presence || "Nickname", "User"
     end
   end
 
-  def user_sign_in(message= "Signed in Successfully")
+  def user_sign_in(user, message= "Signed in Successfully")
     reset_session
     session[:user_id] = user.id 
     redirect_to root_path, flash.now[:notice] = message
