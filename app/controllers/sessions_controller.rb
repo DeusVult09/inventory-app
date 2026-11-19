@@ -23,12 +23,12 @@ class SessionsController < ApplicationController
 
   private 
 
-  def require_auth_hash
-    failure unless omniauth_hash.present?
-  end
-
   def omniauth_hash
     request.env["omniauth.auth"]
+  end
+
+  def require_auth_hash
+    failure unless omniauth_hash.present?
   end
 
   def create_or_find_auth_user
@@ -44,6 +44,4 @@ class SessionsController < ApplicationController
     session[:user_id] = user.id 
     redirect_to root_path, notice: "Signed in Successfully"
   end
-
-
 end
