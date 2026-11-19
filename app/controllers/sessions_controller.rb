@@ -28,8 +28,8 @@ class SessionsController < ApplicationController
 
   def create_or_find_auth_user
     User.create_or_find_by(provider: omniauth_hash["provider"], uid: omniauth_hash["uid"]) do |user|
-    user.email = omniauth_hash.dig("info", "email")
-    user.name = omniauth_hash.dig("info", "name").presence || "Nickname" || "User"
+      user.email = omniauth_hash.dig("info", "email")
+      user.name = omniauth_hash.dig("info", "name").presence || "Nickname" || "User"
     end
   end
 
