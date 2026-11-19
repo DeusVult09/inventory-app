@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     elsif user.blocked?
       redirect_to root_path, alert: "Your account is blocked"
     else
-      render :new, status: :unprocessable_entity
+      redirect_to root_path, alert: "Account cannot be created without an email"
     end
   end
 
@@ -29,13 +29,13 @@ class SessionsController < ApplicationController
   def create_or_find_auth_user
     User.create_or_find_by(provider: omniauth_hash["provider"], uid: omniauth_hash["uid"]) do |user|
     user.email = omniauth_hash.dig("info", "email")
-    user.name = omniauth_hash.dig("info", "name").presence || "Nickname", "User"
+    user.name = omniauth_hash.dig("info", "name").presence || "Nickname" || "User"
     end
   end
 
-  def user_sign_in(user, message= "Signed in Successfully")
+  def user_sign_in(user)
     reset_session
     session[:user_id] = user.id 
-    redirect_to root_path, flash.now[:notice] = message
+    redirect_to root_path, notice: "Signed in Successfully"
   end
 end
