@@ -25,10 +25,15 @@
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-  <nav>
-    <% oauth_providers.each do | provider |%>
-      <%= form_with url: provider[:url], data: {turbo: false} do |form| %>
-         <%= form.button "Sign in with #{provider[:name]}", class: "btn #{provider[:style]}" %>
+  <nav class="d-flex align-items-center gap-2">
+    <% if current_user %>
+      <span><%= current_user.name %></span>
+      <%= button_to "Log out", logout_path, method: :delete, class: "btn btn-outline-secondary" %>
+    <% else %>
+      <% oauth_providers.each do | provider |%>
+        <%= form_with url: provider[:url], data: {turbo: false} do |form| %>
+          <%= form.button "Sign in with #{provider[:name]}", class: "btn #{provider[:style]}" %>
+        <% end %>
       <% end %>
     <% end %>
   </nav>
