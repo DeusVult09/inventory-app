@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     if user.active? && user.persisted?
       user_sign_in(user)
     elsif user.blocked?
-      redirect_to root_path, alert: "Your account is blocked"
+      redirect_to root_path, alert: "Your account is blocked or deleted!"
     else
       redirect_to root_path, alert: "Account cannot be created without an email"
     end
@@ -34,8 +34,7 @@ class SessionsController < ApplicationController
   def create_or_find_auth_user
     User.create_or_find_by(provider: omniauth_hash["provider"], uid: omniauth_hash["uid"]) do |user|
       user.email = omniauth_hash.dig("info", "email")
-      user.name = omniauth_hash.dig("info", "name").presence ||
-                  omniauth_hash.dig("info", "nickname").presence || "User"
+      user.name = omniauth_hash.dig("info", "name").presence || omniauth_hash.dig("info", "nickname").presence || "User"
     end
   end
 

@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     return unless session[:user_id]
     if current_user.nil? || current_user.blocked?
       reset_session
-      redirect_to root_path, alert: "Your session has ended. Please, sign in again"
+      redirect_to root_path, alert: "Your session has ended. The user is no longer active"
     end
   end
 end
