@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  creator: one
+  category: one
+  is_public: false
+  lock_version: 1
+  items_count: 1
+
+two:
+  title: MyString
+  description: MyText
+  creator: two
+  category: two
+  is_public: false
+  lock_version: 1
+  items_count: 1
