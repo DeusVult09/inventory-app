@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     elsif user.blocked?
       redirect_to root_path, alert: "Your account is blocked or deleted!"
     else
-      redirect_to root_path, alert: "Account cannot be created without an email"
+      redirect_to root_path, alert: "Account cannot be created. Please, try again!"
     end
   end
 
