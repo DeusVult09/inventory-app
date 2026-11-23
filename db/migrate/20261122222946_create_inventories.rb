@@ -4,7 +4,7 @@ class CreateInventories < ActiveRecord::Migration[8.1]
       t.string :title, null: false
       t.text :description
       t.references :creator, null: false, foreign_key: { to_table: :users }
-      t.references :category, null: false, foreign_key: { to_table: :categories }
+      t.references :category, null: false, foreign_key: true
       t.boolean :is_public, default: false, null: false
       t.integer :lock_version, default: 0, null: false
       t.integer :items_count, default: 0, null: false

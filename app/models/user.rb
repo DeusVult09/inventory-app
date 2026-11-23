@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+
+  has_many :inventories, foreign_key: "creator_id", dependent: :destroy
+ 
   validates :name, presence: true
   validates :email, presence: true
   normalizes :email, with: -> email { email.strip.downcase }
