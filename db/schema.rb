@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_22_222946) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_23_230806) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -80,6 +80,34 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_22_222946) do
     t.index ["creator_id"], name: "index_inventories_on_creator_id"
   end
 
+  create_table "items", force: :cascade do |t|
+    t.bigint "inventory_id", null: false
+    t.bigint "creator_id"
+    t.string "custom_id", null: false
+    t.integer "lock_version", default: 0, null: false
+    t.integer "sequence", default: 0, null: false
+    t.string "string1"
+    t.text "text1"
+    t.decimal "number1", precision: 12, scale: 2
+    t.string "link1"
+    t.boolean "bool1", default: false, null: false
+    t.string "string2"
+    t.text "text2"
+    t.decimal "number2", precision: 12, scale: 2
+    t.string "link2"
+    t.boolean "bool2", default: false, null: false
+    t.string "string3"
+    t.text "text3"
+    t.decimal "number3", precision: 12, scale: 2
+    t.string "link3"
+    t.boolean "bool3", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_items_on_creator_id"
+    t.index ["inventory_id", "custom_id"], name: "index_items_on_inventory_id_and_custom_id", unique: true
+    t.index ["inventory_id"], name: "index_items_on_inventory_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email"
@@ -94,4 +122,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_22_222946) do
 
   add_foreign_key "inventories", "categories"
   add_foreign_key "inventories", "users", column: "creator_id"
+  add_foreign_key "items", "inventories"
+  add_foreign_key "items", "users", column: "creator_id"
 end
