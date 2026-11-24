@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  inventory: one
+  position: 1
+  kind: MyString
+  format: MyString
+  fixed_text: MyString
+
+two:
+  inventory: two
+  position: 1
+  kind: MyString
+  format: MyString
+  fixed_text: MyString
