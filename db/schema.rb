@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_23_230806) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_24_004251) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -19,6 +19,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_23_230806) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_categories_on_name", unique: true
+  end
+
+  create_table "id_elements", force: :cascade do |t|
+    t.bigint "inventory_id", null: false
+    t.integer "position", null: false
+    t.string "kind", null: false
+    t.string "format"
+    t.string "fixed_text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["inventory_id", "position"], name: "index_id_elements_on_inventory_id_and_position", unique: true
+    t.index ["inventory_id"], name: "index_id_elements_on_inventory_id"
   end
 
   create_table "inventories", force: :cascade do |t|
@@ -120,6 +132,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_23_230806) do
     t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
   end
 
+  add_foreign_key "id_elements", "inventories"
   add_foreign_key "inventories", "categories"
   add_foreign_key "inventories", "users", column: "creator_id"
   add_foreign_key "items", "inventories"
