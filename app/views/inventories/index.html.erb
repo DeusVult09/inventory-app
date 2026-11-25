@@ -1,16 +1,52 @@
-<p style="color: green"><%= notice %></p>
-
 <% content_for :title, "Inventories" %>
 
-<h1>Inventories</h1>
-
-<div id="inventories">
-  <% @inventories.each do |inventory| %>
-    <%= render inventory %>
-    <p>
-      <%= link_to "Show this inventory", inventory %>
-    </p>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1>Inventories</h1>
+  <% if current_user %>
+    <%= link_to "New inventory", new_inventory_path, class: "btn btn-primary" %>
   <% end %>
 </div>
 
-<%= link_to "New inventory", new_inventory_path %>
+<h3>Latest Inventories</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Category</th>
+      <th>Creator</th>
+      <th>Items</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @latest_inventories.each do |inventory| %>
+      <tr>
+        <td><%= link_to inventory.title, inventory %></td>
+        <td><%= inventory.category.name %></td>
+        <td><%= inventory.creator.name %></td>
+        <td><%= inventory.items_count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h3 class="mt-4">Top 5 Inventories</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Category</th>
+      <th>Creator</th>
+      <th>Items</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @top5_inventories.each do |inventory| %>
+      <tr>
+        <td><%= link_to inventory.title, inventory %></td>
+        <td><%= inventory.category.name %></td>
+        <td><%= inventory.creator.name %></td>
+        <td><%= inventory.items_count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
