@@ -3,7 +3,7 @@ class InventoriesController < ApplicationController
 
   
   def index
-    @latest_inventories = 
+    @latest_inventories = In
   end
 
   
