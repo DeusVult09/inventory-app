@@ -1,6 +1,6 @@
 class InventoriesController < ApplicationController
   before_action :set_inventory, only: %i[ show edit update destroy ]
-  before_action :check_user_status, except: %i[ index show ]
+  before_action :require_login, except: %i[ index show ]
   
   def index
     @latest_inventories = Inventory.includes(:creator, :category).latest
