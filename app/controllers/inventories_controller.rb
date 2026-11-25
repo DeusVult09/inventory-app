@@ -3,7 +3,7 @@ class InventoriesController < ApplicationController
   before_action :check_user_status, except: %i[ index show ]
   
   def index
-    @latest_inventories = Inventory.icludes(:creator, :category).latest
+    @latest_inventories = Inventory.includes(:creator, :category).latest
     @top5_inventories = Inventory.includes(:creator, :category).top_5_items
   end
 
@@ -26,7 +26,7 @@ class InventoriesController < ApplicationController
     if @inventory.save
       redirect_to root_path
     else
-      render :new, alert: "You need to sign in first."
+      render :new, 
     end
   end
 

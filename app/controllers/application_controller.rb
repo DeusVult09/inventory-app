@@ -16,4 +16,8 @@ class ApplicationController < ActionController::Base
       redirect_to root_path, alert: "Your session has ended. The user is no longer active!"
     end
   end
+
+  def require_login
+    redirect_to root_path, alert: "You need to sign in first" unless current_user
+  end
 end
