@@ -25,20 +25,20 @@ class InventoriesController < ApplicationController
   def create
     @inventory = current_user.inventories.build(inventory_params)
     if @inventory.save
-      redirect_to @inventory
+      redirect_to @inventory, notice: "New inventory was successfully created."
     else
-      render :new, 
+      render :new, status: :unprocessable_entity
     end
   end
 
   
   def update
-    redirect_to root_path @inventory.update(inventory_params) if @inventory.creator == current_user 
+    redirect_to root_path @inventory.update(inventory_params) 
     render :edit, status: :unprocessable_entity
   end
 
   def destroy
-    @inventory.destroy if @inventory.creator == current_user
+    @inventory.destroy
     redirect_to events_path, notice: "Inventory was successfully deleted"
   end
 
