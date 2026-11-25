@@ -50,7 +50,7 @@ class InventoriesController < ApplicationController
   private
 
     def authorize_user
-      head :forbidden unless @inventory.creator == current_user
+      status :forbidden, alert: "You are not authorized to perform this action!" unless @inventory.creator == current_user
     end
     
     def set_inventory
