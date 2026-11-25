@@ -1,7 +1,8 @@
 class InventoriesController < ApplicationController
   before_action :set_inventory, only: %i[ show edit update destroy ]
   before_action :require_login, except: %i[ index show ]
-  
+  before_action :authorize_user, only: %i[edit update destroy]
+
   def index
     @latest_inventories = Inventory.includes(:creator, :category).latest
     @top5_inventories = Inventory.includes(:creator, :category).top_5_items
@@ -24,7 +25,7 @@ class InventoriesController < ApplicationController
   def create
     @inventory = current_user.inventories.build(inventory_params)
     if @inventory.save
-      redirect_to root_path
+      redirect_to @inventory
     else
       render :new, 
     end
@@ -42,6 +43,10 @@ class InventoriesController < ApplicationController
   end
 
   private
+
+    def authorize_user
+      head :forbidden unless @inventory.creator == current_user
+    end
     
     def set_inventory
       @inventory = Inventory.find(params[:id])
