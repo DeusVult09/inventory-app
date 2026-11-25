@@ -3,6 +3,7 @@ class InventoriesController < ApplicationController
 
   
   def index
+    @latest_inventories = 
   end
 
   
@@ -11,6 +12,7 @@ class InventoriesController < ApplicationController
 
   
   def new
+    @inventory = Inventory.new
   end
 
  
@@ -27,4 +29,14 @@ class InventoriesController < ApplicationController
 
   def destroy
   end
+
+  private
+    
+    def set_inventory
+      @inventory = Inventory.find(params[:id])
+    end
+
+    def inventory_params
+      params.expect(:inventory, [:title, :description, :creator_id, :category_id, :is_public, :lock_version])
+    end
 end
