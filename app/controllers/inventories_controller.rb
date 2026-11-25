@@ -25,7 +25,7 @@ class InventoriesController < ApplicationController
   def create
     @inventory = current_user.inventories.build(inventory_params)
     if @inventory.save
-      redirect_to @inventory, notice: "New inventory was successfully created."
+      redirect_to @inventory, notice: "New inventory was successfully created"
     else
       render :new, status: :unprocessable_entity
     end
@@ -33,8 +33,13 @@ class InventoriesController < ApplicationController
 
   
   def update
-    redirect_to root_path @inventory.update(inventory_params) 
-    render :edit, status: :unprocessable_entity
+    if @inventory.update(inventory_params) 
+      redirect_to @inventory, notice: "Your inventory was successfully updated"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  rescue ActiveRecord::StaleObjectError
+    redirect_to edit_inventory_path(@inventory), alert: "Somebady already updated this inventory. Please try later."
   end
 
   def destroy
