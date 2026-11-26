@@ -1,0 +1,44 @@
+
+<h3>Latest Inventories</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Category</th>
+      <th>Creator</th>
+      <th>Items</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @latest_inventories.each do |inventory| %>
+      <tr>
+        <td><%= link_to inventory.title, inventory %></td>
+        <td><%= inventory.category.name %></td>
+        <td><%= inventory.creator.name %></td>
+        <td><%= inventory.items_count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h3 class="mt-4">Top 5 Inventories</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Category</th>
+      <th>Creator</th>
+      <th>Items</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @top5_inventories.each do |inventory| %>
+      <tr>
+        <td><%= link_to inventory.title, inventory %></td>
+        <td><%= inventory.category.name %></td>
+        <td><%= inventory.creator.name %></td>
+        <td><%= inventory.items_count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
