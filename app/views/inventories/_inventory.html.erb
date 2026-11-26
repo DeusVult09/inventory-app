@@ -7,7 +7,7 @@
     </ul>
   </div>
 <% end %>
-<h2>New Inventory</h2>
+
 <%= form_with model: inventory do |form| %>
    <%= form.hidden_field :lock_version %>
    <div class="mb-0">
@@ -25,12 +25,12 @@
      <%= form.collection_select :category_id, Category.all, :id, :name, { prompt: "Select a Category" }, class: "form-select" %>
    </div>
 
-   <div class="mb-3">
-    <%= form.check_box :is_public, class: "form-check-input" %>
-    <%= form.label :is_public, "Public (any signed in user can add items)", class: "form-check" %>
+   <div class="form-check mb-3">
+      <%= form.check_box :is_public, class: "form-check-input" %>
+      <%= form.label :is_public, "Public (any signed in user can add items)", class: "form-check" %>
    </div>
 
    <div>
-     <%= form.submit "Create Inventory", class: "btn btn-primary" %>
+      <%= form.submit "Create Inventory", class: "btn btn-primary" %>
    </div>
 <% end %>
