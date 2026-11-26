@@ -11,24 +11,24 @@
    <div class="mb-0">
      <%= form.label :title, class: "form-label" %>
      <%= form.text_field :title, class: "form-control", placeholder: "e.g., Office Chairs" %>
-  </div>
+   </div>
 
-  <div class="mb-3">
+   <div class="mb-3">
      <%= form.label :description, class: "form-label" %>
      <%= form.text_field :description, class: "form-control", rows: 3 %>
-  </div><br>
+   </div>
 
-  <div class="mb=3">
+   <div class="mb-3">
      <%= form.label :category_id, "Category", class: "form-label" %>
-     <%= form.collect_select :category_id, Category.all, :id, :name, { promt: "Select a Category" }, class "form-select" %>
-  </div><br>
+     <%= form.collection_select :category_id, Category.all, :id, :name, { prompt: "Select a Category" }, class: "form-select" %>
+   </div>
 
-  <div class="mb-3">
+   <div class="mb-3">
     <%= form.check_box :is_public, class: "form-check-input" %>
     <%= form.label :is_public, "Public (any signed in user can add items)", class: "form-check" %>
-  </div>
+   </div>
 
-  <div>
-     <%= form.submit "Create Inventory" class "btn-primary" %>
-  </div><br>
+   <div>
+     <%= form.submit "Create Inventory" class: "btn-primary" %>
+   </div>
 <% end %>
