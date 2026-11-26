@@ -7,7 +7,9 @@
     </ul>
   </div>
 <% end %>
+<h2>New Inventory</h2>
 <%= form_with model: inventory do |form| %>
+   <%= form.hidden_field :lock_version %>
    <div class="mb-0">
      <%= form.label :title, class: "form-label" %>
      <%= form.text_field :title, class: "form-control", placeholder: "e.g., Office Chairs" %>
@@ -29,6 +31,6 @@
    </div>
 
    <div>
-     <%= form.submit "Create Inventory" class: "btn-primary" %>
+     <%= form.submit "Create Inventory", class: "btn btn-primary" %>
    </div>
 <% end %>
