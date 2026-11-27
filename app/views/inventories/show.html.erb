@@ -1,0 +1,30 @@
+<div class="row justify-content-center">
+  <div class="col-12 col-md-8 col-lg-6">
+    <h2><%= @inventory.title %></h2>
+
+    <h3>Description:</h3>
+    <p><%= @inventory.description %></p>
+
+    <h3>Category:</h3>
+    <p><%= @inventory.category.name %></p>
+
+    <h3>Created by:</h3>
+    <p><%= @inventory.creator.name %></p><br>
+
+    <p>
+      <strong>Visibility:</strong>
+      <%= @inventory.is_public? ? "Public" : "Private" %>
+    </p>
+    
+    <%= link_to "Back to Events", events_path %><br><br>
+    <div class="justify-content-between">
+      <%= link_to "Back to Inventories", root_path, class: "btn btn-outline-info" %>
+      <% if @inventory.creator == current_user %>
+        <div class="d-flex gap-2 mt-3">
+          <%= link_to "Edit", edit_inventory_path(@inventory), class: "btn btn-outline-primary" %>
+          <%= button_to "Delete", @inventory, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-outline-danger" %>
+       </div>
+      <% end %>
+    </div>
+  </div>
+</div>
