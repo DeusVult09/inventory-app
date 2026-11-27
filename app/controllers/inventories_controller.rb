@@ -58,6 +58,6 @@ class InventoriesController < ApplicationController
     end
 
     def inventory_params
-      params.expect(:inventory, [:title, :description, :category_id, :is_public, :lock_version])
+      params.expect(inventory: [:title, :description, :category_id, :is_public, :lock_version])
     end
 end
