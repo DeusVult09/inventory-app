@@ -44,7 +44,7 @@ class InventoriesController < ApplicationController
 
   def destroy
     @inventory.destroy
-    redirect_to events_path, notice: "Inventory was successfully deleted"
+    redirect_to inventories_path, notice: "Inventory was successfully deleted"
   end
 
   private

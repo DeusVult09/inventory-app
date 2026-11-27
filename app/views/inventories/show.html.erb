@@ -1,21 +1,21 @@
 <div class="row justify-content-center">
   <div class="col-12 col-md-8 col-lg-6">
-    <h2><%= @inventory.title %></h2>
+    <h2><%= @inventory.title %></h2><br>
 
-    <h3>Description:</h3>
+    <h4>Description:</h4>
     <p><%= @inventory.description %></p>
 
-    <h3>Category:</h3>
+    <h4>Category:</h4>
     <p><%= @inventory.category.name %></p>
 
-    <h3>Created by:</h3>
+    <h4>Created by:</h4>
     <p><%= @inventory.creator.name %></p><br>
 
     <p>
       <strong>Visibility:</strong>
       <%= @inventory.is_public? ? "Public" : "Private" %>
     </p>
-    
+
     <div class="d-flex gap-2 mt-3">
       <%= link_to "Back to Inventories", root_path, class: "btn btn-outline-info" %>
       <% if @inventory.creator == current_user %>
